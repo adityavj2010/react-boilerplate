@@ -9,6 +9,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --passWithNoTests",
+    "coverage":"npm test -- --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
