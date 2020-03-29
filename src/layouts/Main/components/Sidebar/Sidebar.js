@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
-import { Divider, Drawer } from '@material-ui/core';
+import { Divider, SwipeableDrawer } from '@material-ui/core';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import PeopleIcon from '@material-ui/icons/People';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
@@ -38,8 +38,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Sidebar = props => {
-  const { open, variant, onClose, className, ...rest } = props;
-
+  const { onSidebarOpen,open, variant, onClose, className, ...rest } = props;
+  console.warn("IS SIDEBAR OPEN",open)
   const classes = useStyles();
 
   const pages = [
@@ -86,11 +86,12 @@ const Sidebar = props => {
   ];
 
   return (
-    <Drawer
+    <SwipeableDrawer
       anchor="left"
       classes={{ paper: classes.drawer }}
       onClose={onClose}
       open={open}
+      onOpen={onSidebarOpen}
       variant={variant}
     >
       <div
@@ -105,15 +106,17 @@ const Sidebar = props => {
         />
         <UpgradePlan />
       </div>
-    </Drawer>
+    </SwipeableDrawer>
   );
 };
+
 
 Sidebar.propTypes = {
   className: PropTypes.string,
   onClose: PropTypes.func,
   open: PropTypes.bool.isRequired,
-  variant: PropTypes.string.isRequired
+  variant: PropTypes.string.isRequired,
+  onSidebarOpen:PropTypes.func.isRequired
 };
 
 export default Sidebar;

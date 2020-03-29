@@ -22,7 +22,6 @@ const useStyles = makeStyles(theme => ({
 
 const Topbar = props => {
   const { className, onSidebarOpen, ...rest } = props;
-
   const classes = useStyles();
 
   const [notifications] = useState([]);
@@ -58,7 +57,7 @@ const Topbar = props => {
           </IconButton>
         </Hidden>
         <Hidden lgUp>
-          <IconButton
+        <IconButton
             color="inherit"
             onClick={onSidebarOpen}
           >
