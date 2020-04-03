@@ -1,15 +1,11 @@
-class ApiService {
-  static instance = null;
-  constructor() {
-    if (!ApiService.instance) {
-      ApiService.instance = this;
-    }
-    return ApiService.instance;
-  }
+import config from 'config';
+import { authHeader, handleResponse } from '@/helpers';
 
-  getUserData() {
-    return fetch('/data.json').then(res => res.json());
-  }
+export const userService = {
+  getAll
+};
+
+function getAll() {
+  const requestOptions = { method: 'GET', headers: authHeader() };
+  return fetch(`${config.apiUrl}/users`, requestOptions).then(handleResponse);
 }
-
-export default ApiService;

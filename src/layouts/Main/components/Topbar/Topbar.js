@@ -57,7 +57,7 @@ const Topbar = props => {
           </IconButton>
         </Hidden>
         <Hidden lgUp>
-        <IconButton
+          <IconButton
             color="inherit"
             onClick={onSidebarOpen}
           >
