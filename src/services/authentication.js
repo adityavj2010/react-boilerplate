@@ -1,7 +1,6 @@
 import { BehaviorSubject } from 'rxjs';
 
-import config from 'config';
-import { handleResponse } from '@/helpers';
+import { handleResponse } from '../helpers';
 
 const currentUserSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('currentUser')));
 
@@ -12,20 +11,17 @@ export const authenticationService = {
   get currentUserValue () { return currentUserSubject.value }
 };
 
-function login(username, password) {
+function login(_username) {
   const requestOptions = {
-    method: 'POST',
+    method: 'GET',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, password })
   };
 
-  return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
+  return fetch('https://api.github.com/users/'+_username, requestOptions)
     .then(handleResponse)
     .then(user => {
-      // store user details and jwt token in local storage to keep user logged in between page refreshes
       localStorage.setItem('currentUser', JSON.stringify(user));
       currentUserSubject.next(user);
-
       return user;
     });
 }

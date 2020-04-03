@@ -10,12 +10,12 @@ import {
   Link,
   Typography
 } from '@material-ui/core';
+import { authenticationService } from 'services';
 
 
 const schema = {
-  email: {
+  username: {
     presence: { allowEmpty: false, message: 'is required' },
-    email: true,
     length: {
       maximum: 64
     }
@@ -167,7 +167,16 @@ const SignIn = props => {
 
   const handleSignIn = event => {
     event.preventDefault();
-    history.push('/');
+    authenticationService.login(formState.values.username).then(
+      user => {
+        console.log('user',user)
+        const { from } = { from: { pathname: '/' } };
+        history.push(from)
+      },
+      error => {
+        console.debug('Login Failed')
+      }
+    );
   };
 
   const hasError = field =>
@@ -199,16 +208,16 @@ const SignIn = props => {
                 </Typography>
                 <TextField
                   className={classes.textField}
-                  error={hasError('email')}
+                  error={hasError('username')}
                   fullWidth
                   helperText={
-                    hasError('email') ? formState.errors.email[0] : null
+                    hasError('username') ? formState.errors.username[0] : null
                   }
-                  label="Email address"
-                  name="email"
+                  label="Username"
+                  name="username"
                   onChange={handleChange}
                   type="text"
-                  value={formState.values.email || ''}
+                  value={formState.values.username || ''}
                   variant="outlined"
                 />
                 <TextField
