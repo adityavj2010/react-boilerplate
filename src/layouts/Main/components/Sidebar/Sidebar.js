@@ -39,7 +39,6 @@ const useStyles = makeStyles(theme => ({
 
 const Sidebar = props => {
   const { onSidebarOpen,open, variant, onClose, className, ...rest } = props;
-  console.warn("IS SIDEBAR OPEN",open)
   const classes = useStyles();
 
   const pages = [
@@ -90,8 +89,8 @@ const Sidebar = props => {
       anchor="left"
       classes={{ paper: classes.drawer }}
       onClose={onClose}
-      open={open}
       onOpen={onSidebarOpen}
+      open={open}
       variant={variant}
     >
       <div
