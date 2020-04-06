@@ -6,5 +6,8 @@
   },
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   "editor.formatOnSave": true,
-  "javascript.updateImportsOnFileMove.enabled": "prompt"
+  "javascript.updateImportsOnFileMove.enabled": "prompt",
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  }
 }

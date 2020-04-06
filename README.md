@@ -4,7 +4,7 @@
 
 - Install dependencies: `npm install` or `yarn`
 
-- Start the server: `npm run start` or `yarn start`
+- Start the server: `npm run deploy` or `yarn deploy`
 
-- Views are on: `localhost:3000`
+- Views are on: `localhost:8080`
 
