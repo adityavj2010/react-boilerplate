@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link as RouterLink, withRouter } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import validate from 'validate.js';
 import { makeStyles } from '@material-ui/styles';
@@ -10,7 +10,8 @@ import {
   Link,
   Typography
 } from '@material-ui/core';
-import { authenticationService } from 'services';
+import { connect } from 'react-redux';
+import { ActionTypes } from '../../lib/constants/index';
 
 
 const schema = {
@@ -121,7 +122,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const SignIn = props => {
-  const { history } = props;
+  const { history,login } = props;
 
   const classes = useStyles();
 
@@ -142,6 +143,7 @@ const SignIn = props => {
     }));
   }, [formState.values]);
 
+  // eslint-disable-next-line no-unused-vars
   const handleBack = () => {
     history.goBack();
   };
@@ -167,16 +169,7 @@ const SignIn = props => {
 
   const handleSignIn = event => {
     event.preventDefault();
-    authenticationService.login(formState.values.username).then(
-      user => {
-        console.log('user',user)
-        const { from } = { from: { pathname: '/' } };
-        history.push(from)
-      },
-      error => {
-        console.debug('Login Failed')
-      }
-    );
+    login()
   };
 
   const hasError = field =>
@@ -268,7 +261,20 @@ const SignIn = props => {
 };
 
 SignIn.propTypes = {
-  history: PropTypes.object
+  history: PropTypes.object,
+  login: PropTypes.func
 };
 
-export default withRouter(SignIn);
+
+const mapStateToProps = (state, ownProps) => {
+  console.debug('STATE',state,ownProps)
+  return state;
+}
+const mapDispatchToProps = (dispatch,ownProps) => {
+  console.debug(dispatch)
+  return {
+    login: () => dispatch({type:ActionTypes.USER_LOGIN,payload:{ history:ownProps.history}}),
+  };
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(SignIn);

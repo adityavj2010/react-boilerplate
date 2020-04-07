@@ -1,10 +1,11 @@
+/* eslint-disable no-unused-vars */
 import React, { Component } from 'react';
 import { Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import { Chart } from 'react-chartjs-2';
 import { ThemeProvider } from '@material-ui/styles';
 import validate from 'validate.js';
-
+import { connect } from 'react-redux'
 import { chartjs } from './helpers';
 import theme from './theme';
 import 'react-perfect-scrollbar/dist/css/styles.css';
@@ -23,7 +24,7 @@ validate.validators = {
   ...validators
 };
 
-export default class App extends Component {
+class App extends Component {
   render() {
     return (
       <ThemeProvider theme={theme}>
@@ -34,3 +35,16 @@ export default class App extends Component {
     );
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+  }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
+
